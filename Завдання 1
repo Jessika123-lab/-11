@@ -1,0 +1,64 @@
+import math
+
+
+class TTriangle:
+    def __init__(self, storona_1, storona_2, storona_3):
+        self.storona_1 = storona_1
+        self.storona_2 = storona_2
+        self.storona_3 = storona_3
+
+    def enter(self, storona_1, storona_2, storona_3):
+        if storona_1 >=0:
+            self.storona_1 = storona_1
+        else:
+            raise Exception("Value<0")
+        if self.storona_2 >=0:
+            self.storona_2 = storona_2
+        else:
+            raise Exception("Value<0")
+        self.storona_3=storona_3
+
+    def print(self):
+        print("перша сторона= ", self.storona_1)
+        print("друга сторона= ", self.storona_2)
+        print("третя сторона= ", self.storona_3)
+
+    def S(self):
+        p=(self.storona_1+self.storona_2+self.storona_3)/2
+        return (p*(p-self.storona_1)*(p-self.storona_2)*(p-self.storona_3))**(1/2)
+
+    def P(self):
+        return self.storona_1 + self.storona_2 + self.storona_3
+
+    def compare(self, other):
+        p = (self.storona_1 + self.storona_2 + self.storona_3) / 2
+        if ((p*(p-self.storona_1)*(p-self.storona_2)*(p-self.storona_3))**(1/2) < ((p*(p-other.storona_1)*(p-other.storona_2)*(p-other.storona_3))**(1/2)):
+            print("площа першого < ніж площа другого")
+        elif ((p*(p-self.storona_1)*(p-self.storona_2)*(p-self.storona_3))**(1/2)) > ((p*(p-other.storona_1)*(p-other.storona_2)*(p-other.storona_3))**(1/2)):
+            print("площа першого > ніж площа другого")
+        else:
+            print(" трикутники рівні між собою")
+
+    def __add__(self,item):
+        return TTriangle(self.storona_1 + item.storona_1,self.storona_2 + item.storona_2, self.storona_3 + item.storona_3)
+
+    def __sub__(self,item):
+        return TTriangle(self.storona_1 - item.storona_1, self.storona_2 - item.storona_2, self.storona_3 - item.storona_3)
+    
+    def __mul__(self,number):
+        return TTriangle(self.storona_1*number,self.storona_2*number,self.storona_3*number)
+storona_1 = int(input("сторона1= "))
+storona_2 = int(input("сторона2= "))
+storona_3 = int(input("сторона3= "))
+storona_4 = int(input("сторона4= "))
+storona_5 = int(input("сторона5= "))
+storona_6 = int(input("сторона6= "))
+
+a = TTriangle(storona_1, storona_2, storona_3)
+a.print()
+print("Площа=",a.S())
+print("Периметр=",a.P())
+
+b = TTriangle(storona_4, storona_5, storona_6)
+
+a.compare(b)
